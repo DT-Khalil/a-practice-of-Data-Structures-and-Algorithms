@@ -1,4 +1,4 @@
-// À≥–Ú±Ì
+// È°∫Â∫èË°®
 
 #include <iostream>
 
@@ -9,81 +9,46 @@ using  ElemType = int;
 typedef struct {
     ElemType data[LISTSIZE];
     int length;
-}SeqList;
+}SqeList;
 
-// ≥ı ºªØ
-void InitList(SeqList *L){
-  L->length = 0;
+//ÂàùÂßãÂåñ
+void InitList(SqeList *L){
+  L-> length = 0;
 }
-// ‘⁄Œ≤◊∑º”
-int appendElem(SeqList *L, ElemType e){
+//Âú®Â∞æÈÉ®Âä†ÂÖ•Êñ∞ÂÖÉÁ¥†
+int appendElem(SqeList *L, ElemType e){
   if (L->length >= LISTSIZE){
-     std::cout << "±Ì“—¬˙" << std::endl;
+     std::cout << "È°∫Â∫èË°®Â∑≤Êª°" << std::endl;
      return 0;
     }
   L->data[L->length] = e;
   L->length ++;
   return 1;
 }
-// ±È¿˙
-void ListElem(SeqList *L){
-  for(int i = 0; i < L->length; i++)
-   std::cout << L->data[i] << std::endl;
-}
-// ≤Â»Î
-int insertElem(SeqList *L, int pos, ElemType e){
-  if (L->length == LISTSIZE){
-    std::cout << "±Ì“—¬˙" << std::endl;
-    return 0;
+//ÊèíÂÖ•
+int insertElem(SqeList *L, int pos, ElemType e){
+  if (L->length > LISTSIZE){
+    std::cout << "Ë°®Â∑≤Êª°" << std::endl;
+    return 1;
   }
- 
-  if (pos < 1 || pos > L->length){
-    std::cout << "≤Â»ÎŒª÷√¥ÌŒÛ" << std::endl;
-    return 0;
+  if (pos < 1 || pos > L->length + 1){
+    std::cout << "ÊèíÂÖ•‰ΩçÁΩÆÈîôËØØ" << std::endl;
+    return 1;
   }
-  else{ 
-   for(int i = L->length - 1; i < pos; i--)
-     L->data[L->length] = L->data[L->length-1];
-   L->data[pos-1] = e;
-   L->length ++;
-   return 1;
-  }
-}
-// …æ≥˝
-int deleteElem(SeqList *L, int pos, ElemType *e){
-  if(L->length == 0){
-    std::cout << "±ÌŒ™ø’" << std::endl;
-    return 0;
-  }
-  if (pos < 1 || pos > L->length){
-    std::cout << "…æ≥˝Œª÷√¥ÌŒÛ" << std::endl;
-    return 0;
-   }
-  else{
-   *e = L->data[pos-1];
-   for(int i = pos; i < L->length; i++)
-     L->data[i-1] = L->data[i];
-   L->length --;
-   return 1;
-  }
-}
-//≤È’“
-int FindElem(SeqList *L, ElemType e){
-  for(int i = 0; i < L->length; i++){
-   if(L->data[i] == e)
-    return i+1;
-  }
+  for(int i = L->length - 1; i >= pos - 1; i--)
+    L->data[i+1] = L->data[i];
+  L->data[pos-1] = e;
+  L->length++;
   return 0;
 }
+
 int main(){
-  SeqList L;
+  SqeList L;
   InitList(&L);
   appendElem(&L,1);
   appendElem(&L,2);
   appendElem(&L,4);
   insertElem(&L,3,3);
-  ElemType delData;
-  deleteElem(&L,2,&delData);
-  std::cout << "±ª…æ≥˝µƒ‘™ÀÿŒ™£∫" << delData << std::endl;
-  ListElem(&L);
+  for(int i = 0; i < L.length; i++)
+    std::cout << L.data[i] << std::endl;
 }
