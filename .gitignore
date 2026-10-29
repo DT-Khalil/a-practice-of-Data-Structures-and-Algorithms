@@ -1,0 +1,13 @@
+# C++ 编译产物
+*.exe
+*.o
+*.obj
+*.out
+*.dll
+*.so
+*.dylib
+
+# VSCode 构建中间文件
+build/
+Debug/
+Release/
